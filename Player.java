@@ -22,8 +22,10 @@ public class Player implements Serializable {
         private Healer healer;
         private MythicalCreature mythicalCreature;
         private boolean called = false;
+
+
     
-        // Constructor
+        // Constructor for new player (auto id, default xp/gc)
         public Player(String name, String username) {
             Read_Write db = new Read_Write();
             Player[] arr = db.readplayerarr();
@@ -39,6 +41,26 @@ public class Player implements Serializable {
             this.username = username;
             this.xp = 0;
             this.gc = 500;
+        }
+
+        // Constructor for loading/saving with all fields (used in createProfile)
+        public Player(String name, String username, int xp, double gc, String homeground) {
+            // Assign a unique userId (could be improved if needed)
+            Read_Write db = new Read_Write();
+            Player[] arr = db.readplayerarr();
+            int array_lenth= arr.length;
+            int initial_id=arr[0].getUserId();
+            for(int k=1 ; k<array_lenth ; k++){
+                if(initial_id<arr[k].getUserId()){
+                    initial_id=arr[k].getUserId();
+                }
+            }
+            this.userId=initial_id+1;
+            this.name = name;
+            this.username = username;
+            this.xp = xp;
+            this.gc = gc;
+            this.homeground = homeground;
         }
         public int getUserId() {
             return userId;
