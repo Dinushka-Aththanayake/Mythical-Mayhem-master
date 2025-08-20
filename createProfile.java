@@ -92,7 +92,8 @@ public class createProfile implements Serializable {
         Read_Write savefilee = new Read_Write();
         java.util.List<Player> playerList = new java.util.ArrayList<>();
         for (Player p : arr) {
-            if (p != null) playerList.add(p);
+            if (p != null)
+                playerList.add(p);
         }
         savefilee.writeplayer(playerList);
     }
